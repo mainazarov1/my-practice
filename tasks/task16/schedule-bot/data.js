@@ -1,6 +1,9 @@
 module.exports = {
 	weekSchedule: [
-		
+		{
+			dayName: "sunday",
+			lessons: [],
+		},
 		{
 			dayName: "monday",
 			lessons: [
@@ -76,10 +79,7 @@ module.exports = {
 				},
 			],
 		},
-		{
-			dayName: "sunday",
-			lessons: [],
-		},
+		
 	]
 }
 

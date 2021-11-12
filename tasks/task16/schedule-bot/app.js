@@ -13,44 +13,35 @@ const weekDays = [
   "saturday",
 ];
 
-// const day = data.weekSchedule.find((el) => {
-// 	el.dayName === weekDays[today];
-// });
-// let todayLessons = '';
-// for (let [key, val] of Object.entries(day.lessons)) {
-// 	todayLessons += `${val.name}, ${val.auditory}, ${val.teacher}\n`;
-// }
+const day = data.weekSchedule.find((el) => el.dayName === weekDays[today]);
+let schedule = "";
+if (day.dayName === "sunday") {
+  schedule = `\nДень: ${day.dayName} = Нет расписания, нет уроков ! =)`;
+} else {
+  schedule = `\nДень: ${day.dayName} \nЗанятия:\n`;
+  for (let [key, value] of Object.entries(day.lessons)) {
+    schedule += `${value.name}, ${value.auditory} , ${value.teacher}\n`;
+  }
+}
 
+let weekSchedule = "";
+data.weekSchedule.forEach((element) => {
+  if (element.dayName === "Sunday") {
+    weekSchedule += `\n\nДень: ${element.dayName} = Нет расписания, нет уроков ! =)`;
+  } else {
+    weekSchedule += `\n\nДень: ${element.dayName}\nЗанятия:`;
+    for (let [key, value] of Object.entries(element.lessons)) {
+      weekSchedule += `\n${value.name}, ${value.auditory} , ${value.teacher}`;
+    }
+  }
+});
 
-// bot.command("today", (ctx) => {
-//   // let lessons = "";
-
-//   // for (let [key, value] of Object.entries(day.lessons)) {
-//   //   lessons += `${value.name}, ${value.auditory}, ${value.teacher}\n`;
-// 	// }
-// 	ctx.reply(todayLessons)
-//   // let result = day === 'sunday' ? (`День: ${day} \n Нет расписания, нет уроков ! =)`) : (`День: ${day.dayName} \n${lessons}`);
-	
-// 	// const result = Object.entries(day);
-// 	// ctx.reply(weekDays[today]);
-// 	// ctx.reply(data.weekSchedule[today].dayName);
-
-// });
 bot.command("schedule", (ctx) => {
-	// const weekArr = data.weekSchedule.find(el => el.dayName === weekDays[today]);
-	// let lessons = '';
-	// for (let [key, val] of Object.entries(weekArr.lessons)) {
-	// 	lessons += (`${val}`)
-	// }
-	// let allDays = Object.entries(data.weekSchedule);
-	// for (let [key, val] of Object.entries(allDays)) {
-	// 	allDays += val
-	// }
-	let allWeek = '';
-	data.weekSchedule.forEach((el) => {
-		allWeek += Object.entries(el)
-	})
-	ctx.reply(allWeek);
+  ctx.reply(schedule);
+});
+
+bot.command("weekSchedule", (ctx) => {
+  ctx.reply(weekSchedule);
 });
 
 bot.launch(console.log("BOT START"));
