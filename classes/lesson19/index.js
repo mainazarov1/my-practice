@@ -46,9 +46,14 @@ async function getCountries() {
 }
 async function showCountries() {
 	const countries = await getCountries();
-	const countriesAsia = countries.filter((el) => el.region === 'Asia').map((el) => el.name.official);
-	const countriesAsiaFlag = countries.filter((el) => el.region === 'Asia').map((el) => el.flag);
-	console.log(countriesAsiaFlag);
+	// const countriesAsia = countries.filter((el) => el.region === 'Asia').map((el) => el.name.official);
+	// const countriesAsiaFlag = countries.filter((el) => el.region === 'Asia').map((el) => el.flag);
+	const countriesNames = countries.map((el) => el.name.official);
+	const countriesCapital = countries.map(el=>el.capital)
+	for (let country of countries) {
+			console.log(`Страна: ${country.name.official}, Столица: ${country.capital}`);
+		}
+	// console.log(countriesNames);
 }
 
 showCountries();
